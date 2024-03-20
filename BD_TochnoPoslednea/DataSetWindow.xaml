@@ -1,0 +1,57 @@
+﻿<Window x:Class="BD_TochnoPoslednea.DataSetWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BD_TochnoPoslednea"
+        mc:Ignorable="d"
+        Title="DataSetWindow" Height="450" Width="800">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height ="11*"/>
+            <RowDefinition Height ="2*"/>
+            <RowDefinition Height ="3*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="NameTBX" Grid.Row="1" Grid.Column="1" FontSize="23" Text="Описание_Фильма"/>
+            <TextBox x:Name="NameTbx" Grid.Row="1" Grid.Column="0" FontSize="23" Text="Название_Фильма"/>
+            <TextBox x:Name="MiddleName2" Grid.Row="1" Grid.Column="2" FontSize="23" Text="Не_Трогать"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="Create" Grid.Row="2" Grid.Column="0" Content="Добавить Данные" FontSize="25" Click="Create_Click"/>
+            <Button x:Name="Update" Grid.Row="2" Grid.Column="1" Content="Изменить Данные" FontSize="25" Click="Update_Click"/>
+            <Button x:Name="Delete" Grid.Row="2" Grid.Column="2" Content="Удалить Данные" FontSize="25" Click="Delete_Click"/>
+            <ComboBox Grid.Row="2" Grid.Column="3" x:Name="AllComboBox" SelectionChanged="AllComboBox_SelectionChanged" />
+        </Grid>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="43*"/>
+                <ColumnDefinition Width="15*"/>
+            </Grid.ColumnDefinitions>
+
+            <DataGrid x:Name="AllDataGrid" Grid.Row="0" Grid.Column="0"/>
+
+            <Grid   Grid.Row="0" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height ="5*"/>
+                    <RowDefinition Height ="5*"/>
+                </Grid.RowDefinitions>
+                <ComboBox Grid.Row="0" Grid.Column="0" x:Name="All1ComboBox" SelectionChanged="All1ComboBox_SelectionChanged" />
+                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="All2ComboBox" SelectionChanged="All2ComboBox_SelectionChanged" />
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>

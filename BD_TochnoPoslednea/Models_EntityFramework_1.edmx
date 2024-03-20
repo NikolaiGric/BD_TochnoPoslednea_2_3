@@ -1,0 +1,274 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Cinema_practicModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Films">
+          <Key>
+            <PropertyRef Name="ID_Films" />
+          </Key>
+          <Property Name="ID_Films" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Film" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Description_Film" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Movies">
+          <Key>
+            <PropertyRef Name="ID_Movie" />
+          </Key>
+          <Property Name="ID_Movie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Film_ID" Type="int" Nullable="false" />
+          <Property Name="Producer_ID" Type="int" Nullable="false" />
+          <Property Name="Age_Rating" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Payment_of_Pushkin_card" Type="varchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Producers">
+          <Key>
+            <PropertyRef Name="ID_Producer" />
+          </Key>
+          <Property Name="ID_Producer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Middle_name" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Cinema_practic.dbo.Viewsi" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Viewsi">
+          <Key>
+            <PropertyRef Name="Название фильма" />
+            <PropertyRef Name="Описание фильма" />
+            <PropertyRef Name="Фамилия режиссера" />
+            <PropertyRef Name="Имя режиссера" />
+            <PropertyRef Name="Возрастные ограничения" />
+            <PropertyRef Name="Цена за билет" />
+            <PropertyRef Name="Оплата Пушкинсокй картой" />
+          </Key>
+          <Property Name="Название фильма" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Описание фильма" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Фамилия режиссера" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Имя режиссера" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Отчество режиссера" Type="varchar" MaxLength="20" />
+          <Property Name="Возрастные ограничения" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Цена за билет" Type="int" Nullable="false" />
+          <Property Name="Оплата Пушкинсокй картой" Type="varchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Movies__Film_ID__5812160E">
+          <End Role="Films" Type="Self.Films" Multiplicity="1" />
+          <End Role="Movies" Type="Self.Movies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Films">
+              <PropertyRef Name="ID_Films" />
+            </Principal>
+            <Dependent Role="Movies">
+              <PropertyRef Name="Film_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Movies__Producer__59063A47">
+          <End Role="Producers" Type="Self.Producers" Multiplicity="1" />
+          <End Role="Movies" Type="Self.Movies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producers">
+              <PropertyRef Name="ID_Producer" />
+            </Principal>
+            <Dependent Role="Movies">
+              <PropertyRef Name="Producer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Cinema_practicModelContainer">
+          <EntitySet Name="Films" EntityType="Self.Films" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movies" EntityType="Self.Movies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producers" EntityType="Self.Producers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Viewsi" EntityType="Self.Viewsi" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Viewsi].[Название фильма] AS [Название фильма], 
+    [Viewsi].[Описание фильма] AS [Описание фильма], 
+    [Viewsi].[Фамилия режиссера] AS [Фамилия режиссера], 
+    [Viewsi].[Имя режиссера] AS [Имя режиссера], 
+    [Viewsi].[Отчество режиссера] AS [Отчество режиссера], 
+    [Viewsi].[Возрастные ограничения] AS [Возрастные ограничения], 
+    [Viewsi].[Цена за билет] AS [Цена за билет], 
+    [Viewsi].[Оплата Пушкинсокй картой] AS [Оплата Пушкинсокй картой]
+    FROM [dbo].[Viewsi] AS [Viewsi]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Movies__Film_ID__5812160E" Association="Self.FK__Movies__Film_ID__5812160E">
+            <End Role="Films" EntitySet="Films" />
+            <End Role="Movies" EntitySet="Movies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Movies__Producer__59063A47" Association="Self.FK__Movies__Producer__59063A47">
+            <End Role="Producers" EntitySet="Producers" />
+            <End Role="Movies" EntitySet="Movies" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Cinema_practicModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Films">
+          <Key>
+            <PropertyRef Name="ID_Films" />
+          </Key>
+          <Property Name="ID_Films" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Film" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description_Film" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Movies" Relationship="Self.FK__Movies__Film_ID__5812160E" FromRole="Films" ToRole="Movies" />
+        </EntityType>
+        <EntityType Name="Movies">
+          <Key>
+            <PropertyRef Name="ID_Movie" />
+          </Key>
+          <Property Name="ID_Movie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Film_ID" Type="Int32" Nullable="false" />
+          <Property Name="Producer_ID" Type="Int32" Nullable="false" />
+          <Property Name="Age_Rating" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Payment_of_Pushkin_card" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Films" Relationship="Self.FK__Movies__Film_ID__5812160E" FromRole="Movies" ToRole="Films" />
+          <NavigationProperty Name="Producers" Relationship="Self.FK__Movies__Producer__59063A47" FromRole="Movies" ToRole="Producers" />
+        </EntityType>
+        <EntityType Name="Producers">
+          <Key>
+            <PropertyRef Name="ID_Producer" />
+          </Key>
+          <Property Name="ID_Producer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Middle_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Movies" Relationship="Self.FK__Movies__Producer__59063A47" FromRole="Producers" ToRole="Movies" />
+        </EntityType>
+        <EntityType Name="Viewsi">
+          <Key>
+            <PropertyRef Name="Название_фильма" />
+            <PropertyRef Name="Описание_фильма" />
+            <PropertyRef Name="Фамилия_режиссера" />
+            <PropertyRef Name="Имя_режиссера" />
+            <PropertyRef Name="Возрастные_ограничения" />
+            <PropertyRef Name="Цена_за_билет" />
+            <PropertyRef Name="Оплата_Пушкинсокй_картой" />
+          </Key>
+          <Property Name="Название_фильма" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Описание_фильма" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Фамилия_режиссера" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Имя_режиссера" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Отчество_режиссера" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Возрастные_ограничения" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Цена_за_билет" Type="Int32" Nullable="false" />
+          <Property Name="Оплата_Пушкинсокй_картой" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Movies__Film_ID__5812160E">
+          <End Role="Films" Type="Self.Films" Multiplicity="1" />
+          <End Role="Movies" Type="Self.Movies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Films">
+              <PropertyRef Name="ID_Films" />
+            </Principal>
+            <Dependent Role="Movies">
+              <PropertyRef Name="Film_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Movies__Producer__59063A47">
+          <End Role="Producers" Type="Self.Producers" Multiplicity="1" />
+          <End Role="Movies" Type="Self.Movies" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producers">
+              <PropertyRef Name="ID_Producer" />
+            </Principal>
+            <Dependent Role="Movies">
+              <PropertyRef Name="Producer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Cinema_practicEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Films" EntityType="Self.Films" />
+          <EntitySet Name="Movies" EntityType="Self.Movies" />
+          <EntitySet Name="Producers" EntityType="Self.Producers" />
+          <EntitySet Name="Viewsi" EntityType="Self.Viewsi" />
+          <AssociationSet Name="FK__Movies__Film_ID__5812160E" Association="Self.FK__Movies__Film_ID__5812160E">
+            <End Role="Films" EntitySet="Films" />
+            <End Role="Movies" EntitySet="Movies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Movies__Producer__59063A47" Association="Self.FK__Movies__Producer__59063A47">
+            <End Role="Producers" EntitySet="Producers" />
+            <End Role="Movies" EntitySet="Movies" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Cinema_practicModelContainer" CdmEntityContainer="Cinema_practicEntities">
+          <EntitySetMapping Name="Films">
+            <EntityTypeMapping TypeName="Cinema_practicModel.Films">
+              <MappingFragment StoreEntitySet="Films">
+                <ScalarProperty Name="ID_Films" ColumnName="ID_Films" />
+                <ScalarProperty Name="Name_Film" ColumnName="Name_Film" />
+                <ScalarProperty Name="Description_Film" ColumnName="Description_Film" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movies">
+            <EntityTypeMapping TypeName="Cinema_practicModel.Movies">
+              <MappingFragment StoreEntitySet="Movies">
+                <ScalarProperty Name="ID_Movie" ColumnName="ID_Movie" />
+                <ScalarProperty Name="Film_ID" ColumnName="Film_ID" />
+                <ScalarProperty Name="Producer_ID" ColumnName="Producer_ID" />
+                <ScalarProperty Name="Age_Rating" ColumnName="Age_Rating" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Payment_of_Pushkin_card" ColumnName="Payment_of_Pushkin_card" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producers">
+            <EntityTypeMapping TypeName="Cinema_practicModel.Producers">
+              <MappingFragment StoreEntitySet="Producers">
+                <ScalarProperty Name="ID_Producer" ColumnName="ID_Producer" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Middle_name" ColumnName="Middle_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Viewsi">
+            <EntityTypeMapping TypeName="Cinema_practicModel.Viewsi">
+              <MappingFragment StoreEntitySet="Viewsi">
+                <ScalarProperty Name="Название_фильма" ColumnName="Название фильма" />
+                <ScalarProperty Name="Описание_фильма" ColumnName="Описание фильма" />
+                <ScalarProperty Name="Фамилия_режиссера" ColumnName="Фамилия режиссера" />
+                <ScalarProperty Name="Имя_режиссера" ColumnName="Имя режиссера" />
+                <ScalarProperty Name="Отчество_режиссера" ColumnName="Отчество режиссера" />
+                <ScalarProperty Name="Возрастные_ограничения" ColumnName="Возрастные ограничения" />
+                <ScalarProperty Name="Цена_за_билет" ColumnName="Цена за билет" />
+                <ScalarProperty Name="Оплата_Пушкинсокй_картой" ColumnName="Оплата Пушкинсокй картой" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

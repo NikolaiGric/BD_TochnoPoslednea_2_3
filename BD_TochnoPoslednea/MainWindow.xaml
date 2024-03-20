@@ -1,0 +1,15 @@
+﻿<Window x:Class="BD_TochnoPoslednea.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BD_TochnoPoslednea"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Button x:Name="EntityFramework" Content="Переход на EntityFramework" FontSize="15" Margin="495,64,105,225" Click="EntityFramework_Click"/>
+        <Button x:Name="DataSet" Content="Переход на DataSet" FontSize="15"  Click="DataSet_Click" Margin="105,64,495,225"/>
+        <Button x:Name="EntityFramework2" Content="Переход на EntityFramework_Отображение" FontSize="12"  Click="EntityFramework2_Click" Margin="495,239,105,50"/>
+        <Button x:Name="DataSet2" Content="Переход на DataSet_Отображение" FontSize="12"  Click="DataSet2_Click" Margin="105,239,495,50"/>
+    </Grid>
+</Window>
